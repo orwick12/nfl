@@ -19,7 +19,9 @@ class Scraper(object):
 
     def parse(self, soup):
         for table in soup.findAll('table'):
+            # for row in table:
             line = ""
-            for row in table.find_all('tr')[2:]:
-                line += '"' + row.text
-                print("first %s, Second: %)
+            for td in table.findAll(['td']):
+                line += td.text
+            print(line)
+
