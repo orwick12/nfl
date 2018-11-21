@@ -20,8 +20,13 @@ class Scraper(object):
     def parse(self, soup):
         for table in soup.findAll('table'):
             # for row in table:
-            line = ""
-            for td in table.findAll(['td']):
-                line += td.text
-            print(line)
+            for tr in table.findAll(['tr']):
+                line = ""
+                line += tr.text
+                # print(line)
+                for td in table.findAll(['td']):
+                    player = ""
+                    player += td.text.strip()
+                    print(player)
+                    return player
 
