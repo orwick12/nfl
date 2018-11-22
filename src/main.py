@@ -10,5 +10,5 @@ class Main(object):
 
     def __init__(self):
         self.db = DB()
-        self.scraper = Scraper(websites)
+        self.scraper = Scraper(websites, self.db)
         self.web = Web(self.scraper)
