@@ -19,7 +19,6 @@ class Scraper(object):
 
     def parse(self, soup):
         for table in soup.findAll('table'):
-            # for row in table:
             for row in table.findAll(['tr']):
                 player = []
                 for column in row.findAll(['td']):
