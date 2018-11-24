@@ -26,6 +26,3 @@ class Scraper(object):
                     player.append(playerData)
                 if player:
                     self.db.db_player_insert(player=player[1], team=player[2])
-
-
-
