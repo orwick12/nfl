@@ -21,6 +21,7 @@ class Web(object):
         rv.enable_buffering(5)
         return rv
 
+# TODO pull database into the web
     def getResults(self):
         return 'name'
 

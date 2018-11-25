@@ -56,7 +56,7 @@ class DB(object):
                                                                "AVERAGE FLOAT NOT NULL, YARDSPERGAME FLOAT NOT NULL,"
                                                                "LNG INTEGER NOT NULL, TD INTEGER NOT NULL, "
                                                                "TWENTYPLUS INTEGER NOT NULL, FORTYPLUS INTEGER NOT NULL,"
-                                                               "FIRSTDOWN INTEGER NOT NULL, FIRSTDOWNPERCENT FLOAT NOT NULL,"
+                                                               "FIRSTDOWN INTEGER NOT NULL, FIRSTDOWNPCT FLOAT NOT NULL,"
                                                                "FUMBLE INTEGER NOT NULL,"
                                                                "FOREIGN KEY (player) REFERENCES PLAYER (player));")
         c.execute("CREATE TABLE " + self.table_tightends + " (PLAYER_ID INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -66,13 +66,12 @@ class DB(object):
                                                            "AVERAGE FLOAT NOT NULL, YARDSPERGAME FLOAT NOT NULL, "
                                                            "LNG INTEGER NOT NULL, TD INTEGER NOT NULL, "
                                                            "TWENTYPLUS INTEGER NOT NULL, FORTYPLUS INTEGER NOT NULL, "
-                                                           "FIRSTDOWN INTEGER NOT NULL, FIRSTDOWNPERCENT FLOAT NOT NULL,"
+                                                           "FIRSTDOWN INTEGER NOT NULL, FIRSTDOWNPCT FLOAT NOT NULL,"
                                                            "FUMBLE INTEGER NOT NULL,"
                                                            "FOREIGN KEY (player) REFERENCES PLAYER (player));")
         conn.commit()
         conn.close()
 
-# TODO: create tables for each position and team
     def db_player_insert(self, player, team):
         conn = sqlite3.connect(self.dbFile)
         c = conn.cursor()
@@ -97,20 +96,19 @@ class DB(object):
         conn.commit()
         conn.close()
 
-    def db_wr_insert(self, player, team):
+    def db_wr_insert(self, player, team, pos, rec, yds, average, yardspergame, lng, td, twentyplus, fortyplus, firstdown, firstdownpct, fumble):
         conn = sqlite3.connect(self.dbFile)
         c = conn.cursor()
-        c.execute("INSERT INTO {tn} (PLAYER, TEAM) VALUES (?, ?)".format(tn=self.table_widereceivers),
-                  (player, team))
+        c.execute("INSERT INTO {tn} (PLAYER, TEAM, POS, REC, YDS, AVERAGE, YARDSPERGAME, LNG, TD, TWENTYPLUS, FORTYPLUS, FIRSTDOWN, FIRSTDOWNPCT, FUMBLE) VALUES (?, ?,?,?,?,?,?,?,?,?,?,?,?,?)".format(tn=self.table_widereceivers),
+                  (player, team, pos, rec, yds, average, yardspergame, lng, td, twentyplus, fortyplus, firstdown, firstdownpct, fumble))
         conn.commit()
         conn.close()
 
-    def db_te_insert(self, player, team):
+# TODO TE insert is a mirror of WR need to make this more efficient
+    def db_te_insert(self, player, team, pos, rec, yds, average, yardspergame, lng, td, twentyplus, fortyplus, firstdown, firstdownpct, fumble):
         conn = sqlite3.connect(self.dbFile)
         c = conn.cursor()
-        c.execute("INSERT INTO {tn} (PLAYER, TEAM) VALUES (?, ?)".format(tn=self.table_tightends),
-                  (player, team))
+        c.execute("INSERT INTO {tn} (PLAYER, TEAM, POS, REC, YDS, AVERAGE, YARDSPERGAME, LNG, TD, TWENTYPLUS, FORTYPLUS, FIRSTDOWN, FIRSTDOWNPCT, FUMBLE) VALUES (?, ?,?,?,?,?,?,?,?,?,?,?,?,?)".format(tn=self.table_tightends),
+                  (player, team, pos, rec, yds, average, yardspergame, lng, td, twentyplus, fortyplus, firstdown, firstdownpct, fumble))
         conn.commit()
         conn.close()
-
-# TODO create updateTable()

@@ -31,6 +31,6 @@ class Scraper(object):
                     elif player[3] == "RB":
                         self.db.db_rb_insert(player=player[1], team=player[2],pos=player[3], att=player[4], attpergame=player[5], yds=player[6], average=player[7], yardspergame=player[8], td=player[9], lng=player[10], firstdown=player[11], firstdownpct=player[12], twentyplus=player[13], fortyplus=player[14], fumble=player[15])
                     elif player[3] == "WR":
-                        self.db.db_wr_insert()
+                        self.db.db_wr_insert(player=player[1], team=player[2], pos=player[3], rec=player[4], yds=player[5], average=player[6], yardspergame=player[7], lng=player[8], td=player[9], twentyplus=player[10], fortyplus=player[11], firstdown=player[12], firstdownpct=player[13], fumble=player[14])
                     elif player[3] == "TE":
-                        self.db.db_te_insert()
+                        self.db.db_te_insert(player=player[1], team=player[2], pos=player[3], rec=player[4], yds=player[5], average=player[6], yardspergame=player[7], lng=player[8], td=player[9], twentyplus=player[10], fortyplus=player[11], firstdown=player[12], firstdownpct=player[13], fumble=player[14])
